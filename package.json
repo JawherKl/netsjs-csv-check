@@ -1,0 +1,35 @@
+{
+  "name": "nestjs-csv-processor",
+  "version": "1.0.0",
+  "description": "A NestJS application for processing CSV uploads with validation and MinIO integration.",
+  "main": "dist/main.js",
+  "scripts": {
+    "start": "nest start",
+    "build": "nest build",
+    "test": "jest",
+    "lint": "eslint . --ext .ts"
+  },
+  "dependencies": {
+    "@nestjs/common": "^8.0.0",
+    "@nestjs/core": "^8.0.0",
+    "@nestjs/platform-express": "^8.4.7",
+    "class-transformer": "^0.4.0",
+    "class-validator": "^0.13.1",
+    "dotenv": "^16.5.0",
+    "iconv-lite": "^0.6.3",
+    "minio": "^7.0.0",
+    "pg": "^8.7.1",
+    "typeorm": "^0.2.41"
+  },
+  "devDependencies": {
+    "@nestjs/testing": "^8.0.0",
+    "@types/jest": "^27.5.2",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^27.0.0",
+    "ts-jest": "^27.0.0",
+    "typescript": "^4.5.0"
+  },
+  "license": "MIT"
+}

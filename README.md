@@ -1,3 +1,53 @@
+# NestJS CSV Processor
+
+This project is a NestJS application designed to process CSV uploads with multiple levels of validation and checks. It utilizes MinIO for storage and PostgreSQL for data management.
+
+## Features
+
+- CSV file upload and processing
+- Multi-level validation of CSV data
+- Integration with MinIO for file storage
+- PostgreSQL for data persistence
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/nestjs-csv-processor.git
+   cd nestjs-csv-processor
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Set up environment variables:
+   - Create a `.env` file in the root directory and configure your environment variables.
+
+## Running the Application
+
+To start the application, run:
+```bash
+npm run start
+```
+
+## Testing
+
+To run the tests, use:
+```bash
+npm run test
+```
+
+## Docker
+
+To run the application using Docker, execute:
+```bash
+docker-compose up
+```
+
+## Implementation
+
 ### **Level 1: Basic Checks (Easy)**  
 **Purpose**: Validate file integrity and basic structure.  
 **Key Verifications**:  
@@ -46,3 +96,7 @@
 | **Basic**       | File Integrity       | Extension, size, non-empty                    |  
 | **Moderate**    | Data Structure       | Headers, data types, required fields          |  
 | **Advanced**    | Security & Business  | Injection scans, business rules, compliance  |
+
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
