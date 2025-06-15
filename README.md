@@ -1,6 +1,6 @@
 # NestJS CSV Processor
 
-This project is a NestJS application designed to process CSV uploads with multiple levels of validation and checks. It's using MinIO for storage and PostgreSQL for data management.
+This project is a NestJS application designed to process and validate CSV uploads with multiple levels of validation and checks. It's using MinIO for storage and PostgreSQL for data management.
 
 ## Features
 
