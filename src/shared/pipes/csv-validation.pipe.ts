@@ -1,29 +1,52 @@
 import { PipeTransform, Injectable, BadRequestException } from '@nestjs/common';
 import * as iconv from 'iconv-lite';
 import { ALLOWED_ENCODINGS } from '../constants';
+import { SchemaValidator } from 'src/modules/validation/validators/schema-validator';
+import { CsvDataType, CsvSchema } from '../interfaces/csv-schema.interface';
+import Papa from 'papaparse';
 
 @Injectable()
 export class CsvValidationPipe implements PipeTransform {
+  constructor(private schemaValidator: SchemaValidator) {}
+
   async transform(value: any) {
     if (!value || !value.buffer) {
       throw new BadRequestException('Invalid CSV data');
     }
 
-    const encoding = await this.detectEncoding(value.buffer);
-    if (!ALLOWED_ENCODINGS.includes(encoding)) {
-      throw new BadRequestException(
-        `Invalid file encoding. Allowed encodings: ${ALLOWED_ENCODINGS.join(', ')}`
-      );
+    // Define schema (can be moved to configuration)
+    const schema: CsvSchema = {
+      delimiter: ',',
+      columns: [
+        { name: 'name', type: CsvDataType.STRING, required: true },
+        { name: 'email', type: CsvDataType.EMAIL, required: true },
+        { name: 'age', type: CsvDataType.NUMBER, required: false },
+        { name: 'birthDate', type: CsvDataType.DATE, required: false },
+        { name: 'active', type: CsvDataType.BOOLEAN, required: true }
+      ]
+    };
+
+    const csvContent = value.buffer.toString();
+    const parsedCsv = Papa.parse(csvContent, {
+      delimiter: schema.delimiter,
+      header: true,
+      skipEmptyLines: true
+    });
+
+    if (parsedCsv.errors.length > 0) {
+      throw new BadRequestException(`CSV parsing error: ${parsedCsv.errors[0].message}`);
     }
 
-    // Validate CSV structure
-    const csvContent = this.decodeCsvContent(value.buffer, encoding);
-    await this.validateCsvStructure(csvContent);
+    const headers = Object.keys(parsedCsv.data[0]);
+    const rows = parsedCsv.data.map(row => Object.values(row));
+
+    this.schemaValidator.validateAgainstSchema(headers, rows, schema);
 
     return {
       ...value,
-      encoding,
-      content: csvContent,
+      parsedData: parsedCsv.data,
+      headers,
+      schema
     };
   }
 

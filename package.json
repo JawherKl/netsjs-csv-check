@@ -16,14 +16,17 @@
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
     "dotenv": "^16.5.0",
+    "email-validator": "^2.0.4",
     "iconv-lite": "^0.6.3",
     "minio": "^7.0.0",
+    "papaparse": "^5.5.3",
     "pg": "^8.7.1",
     "typeorm": "^0.2.41"
   },
   "devDependencies": {
     "@nestjs/testing": "^8.0.0",
     "@types/jest": "^27.5.2",
+    "@types/papaparse": "^5.3.16",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
