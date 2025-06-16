@@ -8,7 +8,10 @@ import { CsvValidationPipe } from 'src/shared/pipes/csv-validation.pipe';
 
 @Controller('csv')
 export class CsvController {
-  constructor(private readonly csvService: CsvService) {}
+  constructor(
+    private readonly csvService: CsvService,
+    private readonly csvValidationPipe: CsvValidationPipe
+  ) {}
 
   @Post('upload')
   @UseInterceptors(FileInterceptor('file'))
